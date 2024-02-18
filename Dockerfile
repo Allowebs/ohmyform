@@ -70,4 +70,4 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-# CMD [ "yarn", "start:prod" ]
+CMD [ "yarn", "start:prod" ]
