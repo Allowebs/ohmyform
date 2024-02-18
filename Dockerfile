@@ -56,7 +56,7 @@ COPY --from=ui /usr/src/ui /usr/src/ui
 
 RUN addgroup --gid 9999 ohmyform && adduser -D --uid 9999 -G ohmyform ohmyform
 ENV SECRET_KEY=ChangeMe \
-    CREATE_ADMIN=FALSE \
+    CREATE_ADMIN=TRUE \
     ADMIN_EMAIL=admin@ohmyform.com \
     ADMIN_USERNAME=root \
     ADMIN_PASSWORD=root \
@@ -68,6 +68,8 @@ RUN mkdir -p /run/nginx/
 RUN touch /usr/src/supervisord.log && chmod 777 /usr/src/supervisord.log
 COPY supervisord.conf /etc/supervisord.conf
 COPY nginx.conf /etc/nginx/nginx.conf
+RUN npx browserslist@latest --update-db
+
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 CMD [ "yarn", "start:prod" ]
